@@ -11,7 +11,45 @@ import static org.junit.Assert.*;
  */
 public class ExampleUnitTest {
     @Test
-    public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+    public void basicTemperatureTests() throws Exception {
+        Double testTemp = 5.0;
+
+        Temperature temperature = new Temperature();
+        temperature.setCurrTemp(testTemp);
+
+        assertEquals(temperature.getCurrTemp(), testTemp);
+
+        temperature.changeTempRange(1.5, 6.8);
+        assertTrue(temperature.checkCurrTempInRange());
+
     }
+
+    @Test
+    public void basicHumidityTests() throws Exception {
+        Double testHumidity = 5.0;
+
+        Humidity humidity = new Humidity();
+        humidity.setCurrHumidity(testHumidity);
+
+        assertEquals(humidity.getCurrHumidity(), testHumidity);
+
+        humidity.changeHumidityRange(1.5, 6.8);
+        assertTrue(humidity.checkCurrHumidityInRange());
+
+    }
+
+    @Test
+    public void basicLightLevelTests() throws Exception {
+        Double testLight = 5.0;
+
+        LightLevel lightLevel = new LightLevel();
+        lightLevel.setCurrLight(testLight);
+
+        assertEquals(lightLevel.getCurrLight(), testLight);
+
+        lightLevel.changeLightRange(1.5, 6.8);
+        assertTrue(lightLevel.checkCurrLightInRange());
+
+    }
+
 }
