@@ -11,55 +11,107 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Temperature"
+        android:textStyle="bold"
         tools:layout_editor_absoluteX="152dp"
-        tools:layout_editor_absoluteY="53dp" />
+        tools:layout_editor_absoluteY="53dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.120"/>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="32dp"
+        android:layout_height="39dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/thermometer"
+        tools:layout_editor_absoluteY="60dp"
+        tools:layout_editor_absoluteX="103dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.120"
+        app:layout_constraintHorizontal_bias="0.230" />
+
 
     <TextView
         android:id="@+id/CurrHumidityTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Humidity"
+        android:textStyle="bold"
         tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="173dp" />
+        tools:layout_editor_absoluteY="173dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.320"/>
 
     <TextView
         android:id="@+id/CurrGreenhouseTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Current Greenhouse Conditions"
+        android:textSize="20sp"
+        android:textStyle="bold"
         tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteY="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.050"/>
 
     <TextView
         android:id="@+id/CurrLightTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Light Level"
+        android:textStyle="bold"
         tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="289dp" />
+        tools:layout_editor_absoluteY="289dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.480"/>
 
     <TextView
         android:id="@+id/valueCurrHumidity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="humidity"
-        tools:layout_editor_absoluteX="166dp"
-        tools:layout_editor_absoluteY="209dp" />
+        android:text="humidity value"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.354"
+        app:layout_constraintHorizontal_bias="0.501" />
 
     <TextView
         android:id="@+id/valueCurrLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="light"
-        tools:layout_editor_absoluteX="179dp"
-        tools:layout_editor_absoluteY="323dp" />
+        android:text="light value"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintVertical_bias="0.516" />
 
     <TextView
         android:id="@+id/valueCurrTemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="temp"
-        tools:layout_editor_absoluteX="176dp"
-        tools:layout_editor_absoluteY="86dp" />
+        android:text="temperature value"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.155"/>
 
 </android.support.constraint.ConstraintLayout>
