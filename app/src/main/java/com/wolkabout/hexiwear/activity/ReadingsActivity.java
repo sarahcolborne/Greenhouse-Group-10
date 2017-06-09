@@ -88,29 +88,29 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
     @ViewById
     SingleReading readingHumidity;
 
-    @ViewById
-    SingleReading readingPressure;
+//    @ViewById
+//    SingleReading readingPressure;
 
-    @ViewById
-    SingleReading readingHeartRate;
+//    @ViewById
+//    SingleReading readingHeartRate;
 
     @ViewById
     SingleReading readingLight;
 
-    @ViewById
-    SingleReading readingSteps;
+//    @ViewById
+//    SingleReading readingSteps;
+//
+//    @ViewById
+//    SingleReading readingCalories;
 
-    @ViewById
-    SingleReading readingCalories;
+//    @ViewById
+//    TripleReading readingAcceleration;
 
-    @ViewById
-    TripleReading readingAcceleration;
-
-    @ViewById
-    TripleReading readingMagnet;
-
-    @ViewById
-    TripleReading readingGyro;
+//    @ViewById
+//    TripleReading readingMagnet;
+//
+//    @ViewById
+//    TripleReading readingGyro;
 
     @ViewById
     TextView connectionStatus;
@@ -286,37 +286,37 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
                 readingHumidity.setValue(data);
                 break;
             case PRESSURE:
-                readingPressure.setValue(data);
+                //readingPressure.setValue(data);
                 break;
             case HEARTRATE:
-                readingHeartRate.setValue(data);
+                //readingHeartRate.setValue(data);
                 break;
             case LIGHT:
                 readingLight.setValue(data);
                 break;
             case STEPS:
-                readingSteps.setValue(data);
+                //readingSteps.setValue(data);
                 break;
             case CALORIES:
-                readingCalories.setValue(data);
+               // readingCalories.setValue(data);
                 break;
             case ACCELERATION:
-                final String[] accelerationReadings = data.split(";");
-                readingAcceleration.setFirstValue(accelerationReadings[0]);
-                readingAcceleration.setSecondValue(accelerationReadings[1]);
-                readingAcceleration.setThirdValue(accelerationReadings[2]);
+                //final String[] accelerationReadings = data.split(";");
+//                readingAcceleration.setFirstValue(accelerationReadings[0]);
+//                readingAcceleration.setSecondValue(accelerationReadings[1]);
+//                readingAcceleration.setThirdValue(accelerationReadings[2]);
                 break;
             case MAGNET:
-                final String[] magnetReadings = data.split(";");
-                readingMagnet.setFirstValue(magnetReadings[0]);
-                readingMagnet.setSecondValue(magnetReadings[1]);
-                readingMagnet.setThirdValue(magnetReadings[2]);
+//                final String[] magnetReadings = data.split(";");
+//                readingMagnet.setFirstValue(magnetReadings[0]);
+//                readingMagnet.setSecondValue(magnetReadings[1]);
+//                readingMagnet.setThirdValue(magnetReadings[2]);
                 break;
             case GYRO:
-                final String[] gyroscopeReadings = data.split(";");
-                readingGyro.setFirstValue(gyroscopeReadings[0]);
-                readingGyro.setSecondValue(gyroscopeReadings[1]);
-                readingGyro.setThirdValue(gyroscopeReadings[2]);
+//                final String[] gyroscopeReadings = data.split(";");
+//                readingGyro.setFirstValue(gyroscopeReadings[0]);
+//                readingGyro.setSecondValue(gyroscopeReadings[1]);
+//                readingGyro.setThirdValue(gyroscopeReadings[2]);
                 break;
             default:
                 break;
