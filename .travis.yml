@@ -4,8 +4,8 @@ jdk: oraclejdk8
 android:
   components:
     - tools
-    - platform-tools
     - tools
+    - platform-tools
 
     # The BuildTools version used by your project
     - build-tools-25.0.2
@@ -21,8 +21,11 @@ android:
 
     # Specify at least one system image,
     # if you need to run emulator(s) during your tests
-    - sys-img-armeabi-v7a-android-22
-    - sys-img-armeabi-v7a-android-17
+    #- sys-img-armeabi-v7a-android-22
+    #- sys-img-armeabi-v7a-android-17
+
+script:
+    - ./gradlew build #connectedCheck
 
 before_install:
    - chmod +x gradlew
