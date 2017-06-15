@@ -39,7 +39,7 @@ public class StatusNotificationService extends IntentService {
         //Check that temp, humidity, and light are within range
         public void checkGreenhouseStatus() {
             //Notify when below below temp range
-            if (greenhouse.getHexiTemp() < greenhouse.getTempLowerBound()&& tempCheck = false)
+            if (greenhouse.getHexiTemp() < greenhouse.getTempLowerBound()&& tempCheck = false);
 
             {
                 NotificationCompat.Builder mBuilder0 = new NotificationCompat.Builder(this)
