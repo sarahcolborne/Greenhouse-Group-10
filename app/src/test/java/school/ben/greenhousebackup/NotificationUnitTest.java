@@ -1,5 +1,6 @@
 package school.ben.greenhousebackup;
 
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -7,6 +8,69 @@ import org.junit.Test;
  */
 
 public class NotificationUnitTest {
+
+    @Before
+    public void setUp(){
+        ;
+    }
+
     @Test
-    public void
+    public void testTempBelowRange(){
+        ;
+    }
+
+    @Test
+    public void testTempAboveRange(){
+        ;
+    }
+
+    @Test
+    public void testHumidityBelowRange(){
+        ;
+    }
+
+    @Test
+    public void testHumidityAboveRange(){
+        ;
+    }
+
+    @Test
+    public void testLightBelowRange(){
+        ;
+    }
+
+    @Test
+    public void testLightAboveRange(){
+        ;
+    }
+
+    @Test
+    public void testTempBelowNotification(){
+        ;
+    }
+
+    @Test
+    public void testTempAboveNotification(){
+        ;
+    }
+
+    @Test
+    public void testHumidityBelowNotification(){
+        ;
+    }
+
+    @Test
+    public void testHumidityAboveNotification(){
+        ;
+    }
+
+    @Test
+    public void testLightBelowNotification(){
+        ;
+    }
+
+    @Test
+    public void testLightAboveNotification(){
+        ;
+    }
 }
