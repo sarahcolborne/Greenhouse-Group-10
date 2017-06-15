@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
 
     @OptionsItem
     void setNotifications(){
-        if (running){
+        if (NotificationEventReceiver.alarmRunning(getApplicationContext())){
             //stop notification service
             NotificationEventReceiver.deleteAlarm(getApplicationContext());
         }

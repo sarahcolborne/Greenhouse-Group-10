@@ -36,8 +36,6 @@ public class StatusNotificationService extends IntentService {
     }
 
     private void processStartNotification() {
-        //Check that temp, humidity, and light are within range
-        public void checkGreenhouseStatus() {
             //Notify when below below temp range
             if (greenhouse.getHexiTemp() < greenhouse.getTempLowerBound()&& tempCheck = false)
 
@@ -48,7 +46,6 @@ public class StatusNotificationService extends IntentService {
                         .setContentText("Temperature is below range");
                 NotificationManager NM0 = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 NM0.notify(0, mBuilder0.build());
-                tempCheck = true;
             }
 
             //Notify when above temp range
@@ -61,7 +58,6 @@ public class StatusNotificationService extends IntentService {
                         .setContentText("Temperature is above range");
                 NotificationManager NM1 = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 NM1.notify(1, mBuilder1.build());
-                tempCheck = true;
             }
             //Notify when below humidity range
             if (greenhouse.getHexiHumidity() < greenhouse.getHumidityLowerBound() && humidityCheck = false)
@@ -73,7 +69,6 @@ public class StatusNotificationService extends IntentService {
                         .setContentText("Humidity is below range");
                 NotificationManager NM2 = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 NM2.notify(2, mBuilder2.build());
-                humidityCheck = true;
             }
             //Notify when above humidity range
             if (greenhouse.getHexiHumidity() > greenhouse.getHumidityUpperBound() && humidityCheck = false)
@@ -85,7 +80,6 @@ public class StatusNotificationService extends IntentService {
                         .setContentText("Humidity is above range");
                 NotificationManager NM3 = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 NM3.notify(3, mBuilder3.build());
-                humidityCheck = true;
             }
             //Notify when light is too low
             if (greenhouse.getHexiLight() < greenhouse.getLightLowerBound() && lightCheck = false)
@@ -97,7 +91,6 @@ public class StatusNotificationService extends IntentService {
                         .setContentText("Light is too low");
                 NotificationManager NM4 = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 NM4.notify(4, mBuilder4.build());
-                lightCheck = true;
             }
             //Notify when light is too high
             if (greenhouse.getHexiLight() > greenhouse.getLightUpperBound() && lightCheck = false)
@@ -109,7 +102,6 @@ public class StatusNotificationService extends IntentService {
                         .setContentText("Light is too high");
                 NotificationManager NM5 = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 NM5.notify(5, mBuilder5.build());
-                lightCheck = true;
             }
         }
 

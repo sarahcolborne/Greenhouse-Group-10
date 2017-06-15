@@ -37,6 +37,18 @@ public class NotificationEventReceiver extends WakefulBroadcastReceiver {
         alarmManager.cancel(alarmIntent);
     }
 
+    public static boolean alarmRunning(Context context) {
+        boolean isWorking = (PendingIntent.getService(context,
+                0, new Intent("com.my.package.NotificationEventReceiver"),
+                PendingIntent.FLAG_NO_CREATE) != null);
+        if (isWorking){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();

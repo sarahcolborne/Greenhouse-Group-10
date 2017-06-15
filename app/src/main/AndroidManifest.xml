@@ -93,12 +93,12 @@
             android:name=".service.NotificationService_"
             android:exported="false" />
         <service
-            android:name=".notifications.StatusNotificationService"
+            android:name=".notifications.StatusNotificationService_"
             android:enabled="true"
             android:exported="false" />
 
-        <receiver android:name=".broadcast_receivers.NotificationEventReceiver" />
-        <receiver android:name=".broadcast_receivers.NotificationServiceStarterReceiver">
+        <receiver android:name=".broadcast_receivers.NotificationEventReceiver_" />
+        <receiver android:name=".broadcast_receivers.NotificationServiceStarterReceiver_">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.TIMEZONE_CHANGED" />
