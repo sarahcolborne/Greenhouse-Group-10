@@ -2,10 +2,7 @@ language: android
 sudo: required
 jdk: oraclejdk8
 android:
-  deploy:
-    provider: firebase
-    token:
-      secure:
+  
   components:
     - tools
     - tools
