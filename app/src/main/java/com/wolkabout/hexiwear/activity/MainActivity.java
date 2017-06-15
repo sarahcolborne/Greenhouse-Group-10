@@ -46,6 +46,7 @@ import com.wolkabout.hexiwear.service.DeviceDiscoveryService;
 import com.wolkabout.hexiwear.service.DeviceRegistrationService;
 import com.wolkabout.hexiwear.util.Dialog;
 import com.wolkabout.hexiwear.util.HexiwearDevices;
+import com.wolkabout.hexiwear.receiver.NotificationEventReceiver;
 import com.wolkabout.wolkrestandroid.Credentials_;
 
 import org.androidannotations.annotations.AfterInject;
@@ -278,6 +279,18 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         credentials.clear();
         LoginActivity_.intent(this).flags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK).start();
         finish();
+    }
+
+    @OptionsItem
+    void setNotifications(){
+        if (running){
+            //stop notification service
+            NotificationEventReceiver.deleteAlarm(getApplicationContext());
+        }
+        else {
+            //start notification service
+            NotificationEventReceiver.setupAlarm(getApplicationContext());
+        }
     }
 
     @Override
