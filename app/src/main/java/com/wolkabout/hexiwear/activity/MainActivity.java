@@ -46,7 +46,7 @@ import com.wolkabout.hexiwear.service.DeviceDiscoveryService;
 import com.wolkabout.hexiwear.service.DeviceRegistrationService;
 import com.wolkabout.hexiwear.util.Dialog;
 import com.wolkabout.hexiwear.util.HexiwearDevices;
-import com.wolkabout.hexiwear.receiver.NotificationEventReceiver;
+//import com.wolkabout.hexiwear.receiver.NotificationEventReceiver;
 import com.wolkabout.wolkrestandroid.Credentials_;
 
 import org.androidannotations.annotations.AfterInject;
@@ -282,7 +282,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
     }
 
     @OptionsItem
-    void setNotifications(){
+   /* void setNotifications(){
         if (NotificationEventReceiver.alarmRunning(getApplicationContext())){
             //stop notification service
             NotificationEventReceiver.deleteAlarm(getApplicationContext());
@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
             NotificationEventReceiver.setupAlarm(getApplicationContext());
         }
     }
-
+*/
     @Override
     public void onBackPressed() {
         dialog.showConfirmationAndCancel(0, R.string.sure_want_to_quit, R.string.yes, new DialogInterface.OnClickListener() {
