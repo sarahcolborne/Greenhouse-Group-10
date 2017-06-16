@@ -1,12 +1,14 @@
 package com.wolkabout.hexiwear.service;
 
 import android.app.IntentService;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
 
-import com.wolkabout.hexiwear.receiver.NotificationEventReceiver;
+import com.wolkabout.hexiwear.R;
 
 /**
  * Created by Hugh on 2017-06-08.
