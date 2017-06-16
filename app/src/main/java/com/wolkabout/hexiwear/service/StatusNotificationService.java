@@ -1,4 +1,4 @@
-package com.wolkabout.hexiwear.service;
+/*package com.wolkabout.hexiwear.service;
 
 import android.app.IntentService;
 import android.app.NotificationManager;
@@ -12,7 +12,13 @@ import com.wolkabout.hexiwear.R;
 
 /**
  * Created by Hugh on 2017-06-08.
- */
+
+
+import android.app.NotificationManager;
+import android.content.Context;
+import android.support.v4.app.NotificationCompat;
+
+import com.wolkabout.hexiwear.R;
 
 public class StatusNotificationService extends IntentService {
 
@@ -114,3 +120,4 @@ public class StatusNotificationService extends IntentService {
 
     }
 }
+*/
