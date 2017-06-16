@@ -1,4 +1,4 @@
-package com.wolkabout.hexiwear.receiver;
+/*package com.wolkabout.hexiwear.receiver;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -14,7 +14,7 @@ import java.util.Date;
 
 /**
  * Created by Hugh on 2017-06-13.
- */
+
 
 public class NotificationEventReceiver extends WakefulBroadcastReceiver {
 
@@ -86,3 +86,4 @@ public class NotificationEventReceiver extends WakefulBroadcastReceiver {
     }
 }
 
+*/

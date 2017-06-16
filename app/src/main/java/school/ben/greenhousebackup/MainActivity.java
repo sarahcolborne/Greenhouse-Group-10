@@ -1,4 +1,4 @@
-package school.ben.greenhousebackup;
+/*package school.ben.greenhousebackup;
 
 import android.app.NotificationManager;
 import android.content.Context;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         returns "Current" or "Historic" depending on the current state of the graph
     5) set
 
-    */
+
     //Check that temp, humidity, and light are within range
     boolean tempCheck, humidityCheck, lightCheck;
     public void checkGreenhouseStatus() {
@@ -112,3 +112,4 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+*/
