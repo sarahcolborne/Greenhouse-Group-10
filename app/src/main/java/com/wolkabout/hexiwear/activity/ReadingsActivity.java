@@ -37,6 +37,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.wolkabout.hexiwear.R;
 import com.wolkabout.hexiwear.model.Characteristic;
 import com.wolkabout.hexiwear.model.HexiwearDevice;
@@ -47,7 +49,6 @@ import com.wolkabout.hexiwear.util.Dialog;
 import com.wolkabout.hexiwear.util.HexiwearDevices;
 import com.wolkabout.hexiwear.view.Reading;
 import com.wolkabout.hexiwear.view.SingleReading;
-import com.wolkabout.hexiwear.view.TripleReading;
 import com.wolkabout.wolkrestandroid.Credentials_;
 
 import org.androidannotations.annotations.AfterInject;
@@ -257,7 +258,10 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
     void onConnectionStateChanged(@Receiver.Extra final boolean connectionState) {
         connectionStatus.setText(connectionState ? R.string.readings_connection_connected : R.string.readings_connection_reconnecting);
     }
-
+    DatabaseReference mRootRef;
+    public DatabaseReference mTempRef;
+    public DatabaseReference mLightRef;
+    public DatabaseReference mHumidityRef;
     @Receiver(actions = BluetoothService.DATA_AVAILABLE, local = true)
     void onDataAvailable(Intent intent) {
         progressBar.setVisibility(View.INVISIBLE);
@@ -274,16 +278,21 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
             Log.w(TAG, "UUID " + uuid + " is unknown. Skipping.");
             return;
         }
-
+        mRootRef = FirebaseDatabase.getInstance().getReference();
+        mTempRef =mRootRef.child("Temperature");
+        mLightRef =mRootRef.child("Light");
+        mHumidityRef =mRootRef.child("Humidity");
         switch (characteristic) {
             case BATTERY:
                 readingBattery.setValue(data);
                 break;
             case TEMPERATURE:
                 readingTemperature.setValue(data);
+                mTempRef.push().setValue(data);
                 break;
             case HUMIDITY:
                 readingHumidity.setValue(data);
+                mHumidityRef.push().setValue(data);
                 break;
             case PRESSURE:
                 //readingPressure.setValue(data);
@@ -293,6 +302,7 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
                 break;
             case LIGHT:
                 readingLight.setValue(data);
+                    mLightRef.push().setValue(data);
                 break;
             case STEPS:
                 //readingSteps.setValue(data);
