@@ -70,6 +70,7 @@ import java.util.Map;
 public class ReadingsActivity extends AppCompatActivity implements ServiceConnection {
 
     private static final String TAG = ReadingsActivity.class.getSimpleName();
+    public String TAGS = "TestBlueTooth";
 
     @Extra
     BluetoothDevice device;
@@ -258,10 +259,12 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
     void onConnectionStateChanged(@Receiver.Extra final boolean connectionState) {
         connectionStatus.setText(connectionState ? R.string.readings_connection_connected : R.string.readings_connection_reconnecting);
     }
+
     DatabaseReference mRootRef;
     public DatabaseReference mTempRef;
     public DatabaseReference mLightRef;
     public DatabaseReference mHumidityRef;
+
     @Receiver(actions = BluetoothService.DATA_AVAILABLE, local = true)
     void onDataAvailable(Intent intent) {
         progressBar.setVisibility(View.INVISIBLE);
@@ -275,13 +278,14 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
 
         final Characteristic characteristic = Characteristic.byUuid(uuid);
         if (characteristic == null) {
-            Log.w(TAG, "UUID " + uuid + " is unknown. Skipping.");
+            Log.w(TAGS, "UUID " + uuid + " is unknown. Skipping.");
             return;
         }
         mRootRef = FirebaseDatabase.getInstance().getReference();
-        mTempRef =mRootRef.child("Temperature");
-        mLightRef =mRootRef.child("Light");
-        mHumidityRef =mRootRef.child("Humidity");
+        Log.d(TAGS, mRootRef.toString());
+        mTempRef = mRootRef.child("Temperature");
+        mLightRef = mRootRef.child("Light");
+        mHumidityRef = mRootRef.child("Humidity");
         switch (characteristic) {
             case BATTERY:
                 readingBattery.setValue(data);
@@ -302,13 +306,13 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
                 break;
             case LIGHT:
                 readingLight.setValue(data);
-                    mLightRef.push().setValue(data);
+                mLightRef.push().setValue(data);
                 break;
             case STEPS:
                 //readingSteps.setValue(data);
                 break;
             case CALORIES:
-               // readingCalories.setValue(data);
+                // readingCalories.setValue(data);
                 break;
             case ACCELERATION:
                 //final String[] accelerationReadings = data.split(";");

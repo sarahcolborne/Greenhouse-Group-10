@@ -11,6 +11,7 @@ android {
         targetSdkVersion 22
         versionCode 29
         versionName "1.29"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -70,6 +71,8 @@ def ParcelerVersion = '1.1.6'
 def RestAndroidVersion = '1.1.9'
 
 dependencies {
+    compile 'com.android.support:multidex:1.0.1'
+
     // Android support libraries
     compile "com.android.support:appcompat-v7:$SupportVersion"
     compile "com.android.support:design:$SupportVersion"
@@ -87,15 +90,16 @@ dependencies {
     stagingCompile "com.wolkabout:restandroid:${RestAndroidVersion}.STAGING"
     productionCompile "com.wolkabout:restandroid:${RestAndroidVersion}.PRODUCTION"
 
+    // firebase
     compile 'com.wolkabout:wolk:1.0.2'
-
     compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.7.5'
-    // firebase
-    compile 'com.google.firebase:firebase-auth:11.0.0'
-    compile 'com.google.firebase:firebase-core:9.0.0'
-    compile 'com.google.firebase:firebase-database:9.0.0'
-    debugCompile 'com.google.firebase:firebase-crash:10.0.1'
+    compile 'com.google.firebase:firebase-auth:10.2.1'
+    compile 'com.google.firebase:firebase-core:10.2.1'
+    compile 'com.google.firebase:firebase-database:10.2.1'
+    compile 'com.google.android.gms:play-services:11.0.1'
+    debugCompile 'com.google.firebase:firebase-crash:10.2.1'
+
 }
 
 apt {
