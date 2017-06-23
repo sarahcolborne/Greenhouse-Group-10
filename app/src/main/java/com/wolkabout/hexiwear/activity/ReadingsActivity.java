@@ -71,6 +71,7 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
 
     private static final String TAG = ReadingsActivity.class.getSimpleName();
     public String TAGS = "TestBlueTooth";
+    public String TAGS2 = "TestBlueTooth2";
 
     @Extra
     BluetoothDevice device;
@@ -282,7 +283,7 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
             return;
         }
         mRootRef = FirebaseDatabase.getInstance().getReference();
-        Log.d(TAGS, mRootRef.toString());
+                Log.d(TAGS, "type is" + uuid + " value:" + data);
         mTempRef = mRootRef.child("Temperature");
         mLightRef = mRootRef.child("Light");
         mHumidityRef = mRootRef.child("Humidity");
@@ -292,6 +293,7 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
                 break;
             case TEMPERATURE:
                 readingTemperature.setValue(data);
+                Log.d(TAGS, "type is" + uuid + " value:" + data);
                 mTempRef.push().setValue(data);
                 break;
             case HUMIDITY:
