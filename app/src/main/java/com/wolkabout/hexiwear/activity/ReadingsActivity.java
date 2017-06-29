@@ -265,7 +265,10 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
     public DatabaseReference mTempRef;
     public DatabaseReference mLightRef;
     public DatabaseReference mHumidityRef;
-
+    public DatabaseReference mCurrentRef;
+    public DatabaseReference mCurrTemp;
+    public DatabaseReference mCurrHumidity;
+    public DatabaseReference mCurrLight;
     @Receiver(actions = BluetoothService.DATA_AVAILABLE, local = true)
     void onDataAvailable(Intent intent) {
         progressBar.setVisibility(View.INVISIBLE);
@@ -287,6 +290,10 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
         mTempRef = mRootRef.child("Temperature");
         mLightRef = mRootRef.child("Light");
         mHumidityRef = mRootRef.child("Humidity");
+        mCurrentRef = mRootRef.child("Current_Readings");
+        mCurrTemp = mCurrentRef.child("Current_Temperature");
+        mCurrHumidity =mCurrentRef.child("Current_Humidity");
+        mCurrLight=mCurrentRef.child("Current_Light");
         switch (characteristic) {
             case BATTERY:
                 readingBattery.setValue(data);
@@ -295,10 +302,12 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
                 readingTemperature.setValue(data);
                 Log.d(TAGS, "type is" + uuid + " value:" + data);
                 mTempRef.push().setValue(data);
+                mCurrTemp.setValue(data);
                 break;
             case HUMIDITY:
                 readingHumidity.setValue(data);
                 mHumidityRef.push().setValue(data);
+                mCurrHumidity.setValue(data);
                 break;
             case PRESSURE:
                 //readingPressure.setValue(data);
@@ -309,6 +318,7 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
             case LIGHT:
                 readingLight.setValue(data);
                 mLightRef.push().setValue(data);
+                mCurrHumidity.setValue(data);
                 break;
             case STEPS:
                 //readingSteps.setValue(data);
