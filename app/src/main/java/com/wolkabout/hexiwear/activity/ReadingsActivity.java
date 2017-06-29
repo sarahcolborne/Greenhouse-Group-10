@@ -318,7 +318,7 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
             case LIGHT:
                 readingLight.setValue(data);
                 mLightRef.push().setValue(data);
-                mCurrHumidity.setValue(data);
+                mCurrLight.setValue(data);
                 break;
             case STEPS:
                 //readingSteps.setValue(data);
