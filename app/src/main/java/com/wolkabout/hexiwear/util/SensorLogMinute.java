@@ -33,6 +33,7 @@ public class SensorLogMinute {
            avgTemp = temp;
            avgHumid = humid;
            avgLux = lux;
+           changed = false;
        }
        else {
            secs = new SensorEntry[60];

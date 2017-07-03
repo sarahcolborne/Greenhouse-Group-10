@@ -16,12 +16,13 @@ import static org.junit.Assert.*;
 public class SensorEntryContainerTests {
 //    SensorLogYear testYear;
 //    SensorLogMonth testMonth;
-//    SensorLogDay testDay;
-//    SensorLogHour testHour;
-    SensorLogMinute testMinute;
+    SensorLogDay testDay;
     SensorLogHour testHour;
+    SensorLogMinute testMinute;
     double testMinAvg;
     double testHourAvg;
+    double testDayAvg;
+
     @Before
     public void initialize(){
         //prepare for tests
@@ -37,6 +38,14 @@ public class SensorEntryContainerTests {
             testHour.addMinute(new SensorLogMinute(true,i,i,i));
         }
         testHourAvg = testMinAvg;
+
+        testDayAvg = 0;
+        testDay = new SensorLogDay();
+        for(int i=0; i<24; i++){
+            testDay.addHour(new SensorLogHour(true, i,i,i));
+            testDayAvg+=i;
+        }
+        testDayAvg = testDayAvg/24;
 
     }
 
@@ -66,6 +75,19 @@ public class SensorEntryContainerTests {
     @Test
     public void hourGetAverageHumidTest(){
         assertTrue(testHourAvg == testHour.getAverageHumid());
+    }
+
+    @Test
+    public void dayGetAverageTempTest(){
+        assertTrue(testDayAvg == testHour.getAverageTemp());
+    }
+    @Test
+    public void dayGetAverageLuxTest(){
+        assertTrue(testDayAvg == testHour.getAverageLux());
+    }
+    @Test
+    public void dayGetAverageHumidTest(){
+        assertTrue(testDayAvg == testHour.getAverageHumid());
     }
 
 

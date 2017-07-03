@@ -9,10 +9,28 @@ package com.wolkabout.hexiwear.util;
 public class SensorLogHour {
     public SensorLogMinute[] mins;
     public int size;
+    public boolean changed;
+    public Double avgTemp;
+    public Double avgLux;
+    public Double avgHumid;
 
     public SensorLogHour(){
         mins = new SensorLogMinute[60];
         int size = 0;
+        changed = false;
+    }
+    public SensorLogHour(boolean test, double temp, double lux, double humid){
+        if(test){
+            avgTemp=temp;
+            avgLux=lux;
+            avgHumid=humid;
+            changed = false;
+        }
+        else{
+            mins = new SensorLogMinute[60];
+            int size = 0;
+            changed = false;
+        }
     }
 
     public boolean addMinute(SensorLogMinute minute){
@@ -25,6 +43,9 @@ public class SensorLogHour {
     }
 
     public double getAverageTemp(){
+        if(!changed && avgTemp != null)
+            return avgTemp;
+
         double total =0;
         for(int i=0; i<this.size; i++){
             total+=mins[i].getAverageTemp();
@@ -33,6 +54,9 @@ public class SensorLogHour {
     }
 
     public double getAverageLux(){
+        if(!changed && avgLux != null)
+            return avgLux;
+
         double total =0;
         for(int i=0; i<this.size; i++){
             total+=mins[i].getAverageLux();
@@ -41,6 +65,9 @@ public class SensorLogHour {
     }
 
     public double getAverageHumid(){
+        if(!changed && avgHumid != null)
+            return avgHumid;
+
         double total =0;
         for(int i=0; i<this.size; i++){
             total+=mins[i].getAverageHumid();
