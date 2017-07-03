@@ -28,4 +28,20 @@ public class SensorLogMinute {
         return total/size;
     }
 
+    public double getAverageLux(){
+        double total =0;
+        for(int i=0; i<this.size; i++){
+            total+=secs[i].getLux();
+        }
+        return total/size;
+    }
+
+    public double getAverageHumid(){
+        double total =0;
+        for(int i=0; i<this.size; i++){
+            total+=secs[i].getHumid();
+        }
+        return total/size;
+    }
+
 }

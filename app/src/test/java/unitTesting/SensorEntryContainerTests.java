@@ -40,11 +40,11 @@ public class SensorEntryContainerTests {
     }
     @Test
     public void minuteGetAverageLuxTest(){
-       // assertTrue(testMinAvg == testMinute.getAverageLux());
+       assertTrue(testMinAvg == testMinute.getAverageLux());
     }
     @Test
     public void minuteGetAverageHumidTest(){
-       // assertTrue(testMinAvg == testMinute.getAverageHumid());
+       assertTrue(testMinAvg == testMinute.getAverageHumid());
     }
     @Test
     public void addYearTest(){
