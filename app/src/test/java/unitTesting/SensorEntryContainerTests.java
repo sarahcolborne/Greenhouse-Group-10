@@ -24,9 +24,8 @@ public class SensorEntryContainerTests {
         //prepare for tests
         testMinute = new SensorLogMinute();
         for(int i=0; i<60; i++){
-            testMinute.secs[i]= new SensorEntry(i,i,i);
+            testMinute.addSecond( new SensorEntry(i,i,i));
             testMinAvg+=i;
-            testMinute.size++;
         }
 
 

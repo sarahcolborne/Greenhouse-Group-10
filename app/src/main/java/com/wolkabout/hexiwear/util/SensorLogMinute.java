@@ -20,6 +20,15 @@ public class SensorLogMinute {
         size = i;
     }
 
+    public boolean addSecond(SensorEntry entry){
+        if(size==60){
+            return false;
+        }
+        secs[size]=entry;
+        size++;
+        return true;
+    }
+
     public double getAverageTemp(){
         double total =0;
         for(int i=0; i<this.size; i++){
