@@ -21,6 +21,7 @@ public class SensorEntryContainerTests {
     SensorLogMinute testMinute;
     SensorLogHour testHour;
     double testMinAvg;
+    double testHourAvg;
     @Before
     public void initialize(){
         //prepare for tests
@@ -31,14 +32,12 @@ public class SensorEntryContainerTests {
         }
         testMinAvg=testMinAvg/60;
 
-//        testHour = new SensorLogHour();
-//        for(int i=0; i<60; i++){
-//            SensorLogMinute toAdd = new SensorLogMinute(){
-//
-//            }
-//            testHour.addMinute(
-//            )
-//        }
+        testHour = new SensorLogHour();
+        for(int i=0; i<60; i++){
+            testHour.addMinute(new SensorLogMinute(true,i,i,i));
+        }
+        testHourAvg = testMinAvg;
+
     }
 
     @Test
@@ -54,6 +53,22 @@ public class SensorEntryContainerTests {
     public void minuteGetAverageHumidTest(){
        assertTrue(testMinAvg == testMinute.getAverageHumid());
     }
+
+    @Test
+    public void hourGetAverageTempTest(){
+        assertTrue(testHourAvg == 29.5);
+        assertTrue(testHourAvg == testHour.getAverageTemp());
+    }
+    @Test
+    public void hourGetAverageLuxTest(){
+        assertTrue(testHourAvg == testHour.getAverageLux());
+    }
+    @Test
+    public void hourGetAverageHumidTest(){
+        assertTrue(testHourAvg == testHour.getAverageHumid());
+    }
+
+
     @Test
     public void addYearTest(){
         /*

@@ -21,6 +21,26 @@ public class SensorLogMinute {
         changed = false;
     }
 
+    /**
+     * extra constructor for testing that allows efficient loading of placeholder average values
+     * @param test
+     * @param temp
+     * @param lux
+     * @param humid
+     */
+    public SensorLogMinute(boolean test, double temp, double lux, double humid){
+       if(test) {
+           avgTemp = temp;
+           avgHumid = humid;
+           avgLux = lux;
+       }
+       else {
+           secs = new SensorEntry[60];
+           size = 0;
+           changed = false;
+       }
+    }
+
     public void setSize(int i){
         size = i;
     }
@@ -36,7 +56,7 @@ public class SensorLogMinute {
     }
 
     public double getAverageTemp(){
-        if(!changed && avgTemp==null)
+        if(!changed && avgTemp!=null)
             return avgTemp;
 
         double total =0;
@@ -47,7 +67,7 @@ public class SensorLogMinute {
     }
 
     public double getAverageLux(){
-        if(!changed && avgTemp==null)
+        if(!changed && avgLux!=null)
             return avgLux;
 
         double total =0;
@@ -58,7 +78,7 @@ public class SensorLogMinute {
     }
 
     public double getAverageHumid(){
-        if(!changed && avgTemp==null)
+        if(!changed && avgHumid!=null)
             return avgHumid;
 
         double total =0;
