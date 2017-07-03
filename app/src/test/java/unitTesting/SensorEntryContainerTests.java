@@ -4,6 +4,9 @@ import com.wolkabout.hexiwear.util.SensorEntry;
 import com.wolkabout.hexiwear.util.SensorLogDay;
 import com.wolkabout.hexiwear.util.SensorLogHour;
 import com.wolkabout.hexiwear.util.SensorLogMinute;
+import com.wolkabout.hexiwear.util.SensorLogMonth;
+import com.wolkabout.hexiwear.util.SensorLogWeek;
+import com.wolkabout.hexiwear.util.SensorLogYear;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -132,35 +135,28 @@ public class SensorEntryContainerTests {
         assertTrue(testWeekAvg == testWeek.getAverageHumid());
     }
 
-
     @Test
-    public void addYearTest(){
-        /*
-        create a full year
-        try to add a new entry
-        verify that a new year object is created
-         */
-
+    public void monthGetAverageTempTest(){
+        assertTrue(testMonthAvg == testMonth.getAverageTemp());
+    }
+    @Test
+    public void monthGetAverageLuxTest(){
+        assertTrue(testMonthAvg == testMonth.getAverageLux());
+    }
+    @Test
+    public void monthGetAverageHumidTest(){
+        assertTrue(testMonthAvg == testMonth.getAverageHumid());
     }
     @Test
     public void yearGetAverageTempTest(){
-        /*fill a year with constant value months
-        check that the averageTemp method return matches the expected value
-        calculated manually
-         */
+        assertTrue(testYearAvg == testYear.getAverageTemp());
     }
     @Test
-    public void yearGetAverageLightTest(){
-        /*fill a year with constant value months
-        check that the averageTemp method return matches the expected value
-        calculated manually
-         */
+    public void yearGetAverageLuxTest(){
+        assertTrue(testYearAvg == testYear.getAverageLux());
     }
     @Test
-    public void yearGetAverageHumidityTest(){
-        /*fill a year with constant value months
-        check that the averageTemp method return matches the expected value
-        calculated manually
-         */
+    public void yearGetAverageHumidTest() {
+        assertTrue(testYearAvg == testYear.getAverageHumid());
     }
 }

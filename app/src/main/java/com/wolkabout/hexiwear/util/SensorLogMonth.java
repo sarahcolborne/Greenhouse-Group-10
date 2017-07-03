@@ -4,20 +4,21 @@ package com.wolkabout.hexiwear.util;
  * Created by Ben on 2017-07-03.
  */
 
-public class SensorLogDay {
-    public SensorLogHour[] hours;
+public class SensorLogMonth {
+
+    public SensorLogWeek[] weeks;
     public int size;
     public boolean changed;
     public Double avgTemp;
     public Double avgLux;
     public Double avgHumid;
 
-    public SensorLogDay(){
-        hours = new SensorLogHour[24];
+    public SensorLogMonth(){
+        weeks = new SensorLogWeek[4];
         int size = 0;
         changed = false;
     }
-    public SensorLogDay(boolean test, double temp, double lux, double humid){
+    public SensorLogMonth(boolean test, double temp, double lux, double humid){
         if(test){
             avgTemp=temp;
             avgLux=lux;
@@ -25,17 +26,17 @@ public class SensorLogDay {
             changed = false;
         }
         else{
-            hours = new SensorLogHour[24];
+            weeks = new SensorLogWeek[4];
             int size = 0;
             changed = false;
         }
     }
 
-    public boolean addHour(SensorLogHour hour){
-        if(size==24){
+    public boolean addWeek(SensorLogWeek week){
+        if(size==4){
             return false;
         }
-        hours[size]= hour;
+        weeks[size]= week;
         size++;
         return true;
     }
@@ -46,7 +47,7 @@ public class SensorLogDay {
 
         double total =0;
         for(int i=0; i<this.size; i++){
-            total+=hours[i].getAverageTemp();
+            total+=weeks[i].getAverageTemp();
         }
         avgTemp = total/size;
         return avgTemp;
@@ -58,7 +59,7 @@ public class SensorLogDay {
 
         double total =0;
         for(int i=0; i<this.size; i++){
-            total+=hours[i].getAverageLux();
+            total+=weeks[i].getAverageLux();
         }
         avgLux= total/size;
         return avgLux;
@@ -70,7 +71,7 @@ public class SensorLogDay {
 
         double total =0;
         for(int i=0; i<this.size; i++){
-            total+=hours[i].getAverageHumid();
+            total+=weeks[i].getAverageHumid();
         }
         avgHumid=total/size;
         return avgHumid;
