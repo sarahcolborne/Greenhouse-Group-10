@@ -12,6 +12,39 @@ public class SensorLogHour {
 
     public SensorLogHour(){
         mins = new SensorLogMinute[60];
-        int size;
+        int size = 0;
+    }
+
+    public boolean addMinute(SensorLogMinute minute){
+        if(size==60){
+            return false;
+        }
+        mins[size]= minute;
+        size++;
+        return true;
+    }
+
+    public double getAverageTemp(){
+        double total =0;
+        for(int i=0; i<this.size; i++){
+            total+=mins[i].getAverageTemp();
+        }
+        return total/size;
+    }
+
+    public double getAverageLux(){
+        double total =0;
+        for(int i=0; i<this.size; i++){
+            total+=mins[i].getAverageLux();
+        }
+        return total/size;
+    }
+
+    public double getAverageHumid(){
+        double total =0;
+        for(int i=0; i<this.size; i++){
+            total+=mins[i].getAverageHumid();
+        }
+        return total/size;
     }
 }

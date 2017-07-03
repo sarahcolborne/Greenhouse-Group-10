@@ -1,6 +1,7 @@
 package unitTesting;
 
 import com.wolkabout.hexiwear.util.SensorEntry;
+import com.wolkabout.hexiwear.util.SensorLogHour;
 import com.wolkabout.hexiwear.util.SensorLogMinute;
 
 import org.junit.Before;
@@ -18,6 +19,7 @@ public class SensorEntryContainerTests {
 //    SensorLogDay testDay;
 //    SensorLogHour testHour;
     SensorLogMinute testMinute;
+    SensorLogHour testHour;
     double testMinAvg;
     @Before
     public void initialize(){
@@ -27,9 +29,16 @@ public class SensorEntryContainerTests {
             testMinute.addSecond( new SensorEntry(i,i,i));
             testMinAvg+=i;
         }
-
-
         testMinAvg=testMinAvg/60;
+
+//        testHour = new SensorLogHour();
+//        for(int i=0; i<60; i++){
+//            SensorLogMinute toAdd = new SensorLogMinute(){
+//
+//            }
+//            testHour.addMinute(
+//            )
+//        }
     }
 
     @Test
