@@ -15,6 +15,13 @@ public class SensorEntry {
         timeStamp = System.currentTimeMillis();
     }
 
+    public SensorEntry(double temp, double lux, double humid) {
+        timeStamp = System.currentTimeMillis();
+        this.temp=temp;
+        this.lux=lux;
+        this.humid=humid;
+    }
+
     public double getHumid() {
         return humid;
     }

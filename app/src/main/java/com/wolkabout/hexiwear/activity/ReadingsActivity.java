@@ -47,6 +47,7 @@ import com.wolkabout.hexiwear.service.BluetoothService;
 import com.wolkabout.hexiwear.service.BluetoothService_;
 import com.wolkabout.hexiwear.util.Dialog;
 import com.wolkabout.hexiwear.util.HexiwearDevices;
+import com.wolkabout.hexiwear.util.SensorEntry;
 import com.wolkabout.hexiwear.view.Reading;
 import com.wolkabout.hexiwear.view.SingleReading;
 import com.wolkabout.wolkrestandroid.Credentials_;
@@ -269,6 +270,7 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
     public DatabaseReference mCurrTemp;
     public DatabaseReference mCurrHumidity;
     public DatabaseReference mCurrLight;
+    public SensorEntry sensorData = new SensorEntry();
     @Receiver(actions = BluetoothService.DATA_AVAILABLE, local = true)
     void onDataAvailable(Intent intent) {
         progressBar.setVisibility(View.INVISIBLE);
