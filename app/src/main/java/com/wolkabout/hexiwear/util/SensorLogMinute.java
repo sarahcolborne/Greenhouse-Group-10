@@ -64,7 +64,8 @@ public class SensorLogMinute {
         for(int i=0; i<this.size; i++){
             total+=secs[i].getTemp();
         }
-        return total/size;
+        avgTemp = total/size;
+        return avgTemp;
     }
 
     public double getAverageLux(){
@@ -75,7 +76,8 @@ public class SensorLogMinute {
         for(int i=0; i<this.size; i++){
             total+=secs[i].getLux();
         }
-        return total/size;
+        avgLux=total/size;
+        return avgLux;
     }
 
     public double getAverageHumid(){
@@ -86,7 +88,8 @@ public class SensorLogMinute {
         for(int i=0; i<this.size; i++){
             total+=secs[i].getHumid();
         }
-        return total/size;
+        avgHumid=total/size;
+        return avgHumid;
     }
 
 }

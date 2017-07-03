@@ -1,6 +1,7 @@
 package unitTesting;
 
 import com.wolkabout.hexiwear.util.SensorEntry;
+import com.wolkabout.hexiwear.util.SensorLogDay;
 import com.wolkabout.hexiwear.util.SensorLogHour;
 import com.wolkabout.hexiwear.util.SensorLogMinute;
 
@@ -14,14 +15,18 @@ import static org.junit.Assert.*;
  */
 
 public class SensorEntryContainerTests {
-//    SensorLogYear testYear;
-//    SensorLogMonth testMonth;
+    SensorLogYear testYear;
+    SensorLogMonth testMonth;
+    SensorLogWeek testWeek;
     SensorLogDay testDay;
     SensorLogHour testHour;
     SensorLogMinute testMinute;
     double testMinAvg;
     double testHourAvg;
     double testDayAvg;
+    double testWeekAvg;
+    double testMonthAvg;
+    double testYearAvg;
 
     @Before
     public void initialize(){
@@ -46,6 +51,30 @@ public class SensorEntryContainerTests {
             testDayAvg+=i;
         }
         testDayAvg = testDayAvg/24;
+
+        testWeekAvg=0;
+        testWeek = new SensorLogWeek();
+        for(int i=0; i<7; i++){
+            testWeek.addDay(new SensorLogDay(true, i, i, i));
+            testWeekAvg+=i;
+        }
+        testWeekAvg = testWeekAvg/7;
+
+        testMonthAvg = 0;
+        testMonth = new SensorLogMonth();
+        for(int i=0; i<4; i++){
+            testMonth.addWeek(new SensorLogWeek(true, i,i,i));
+            testMonthAvg+=i;
+        }
+        testMonthAvg=testMonthAvg/4;
+
+        testYearAvg=0;
+        testYear = new SensorLogYear();
+        for(int i=0; i<12; i++){
+            testYear.addMonth(new SensorLogMonth(true, i, i, i));
+            testYearAvg+=i;
+        }
+        testYearAvg=testYearAvg/12;
 
     }
 
@@ -79,15 +108,28 @@ public class SensorEntryContainerTests {
 
     @Test
     public void dayGetAverageTempTest(){
-        assertTrue(testDayAvg == testHour.getAverageTemp());
+        assertTrue(testDayAvg == testDay.getAverageTemp());
     }
     @Test
     public void dayGetAverageLuxTest(){
-        assertTrue(testDayAvg == testHour.getAverageLux());
+        assertTrue(testDayAvg == testDay.getAverageLux());
     }
     @Test
     public void dayGetAverageHumidTest(){
-        assertTrue(testDayAvg == testHour.getAverageHumid());
+        assertTrue(testDayAvg == testDay.getAverageHumid());
+    }
+
+    @Test
+    public void weekGetAverageTempTest(){
+        assertTrue(testWeekAvg == testWeek.getAverageTemp());
+    }
+    @Test
+    public void weekGetAverageLuxTest(){
+        assertTrue(testWeekAvg == testWeek.getAverageLux());
+    }
+    @Test
+    public void weekGetAverageHumidTest(){
+        assertTrue(testWeekAvg == testWeek.getAverageHumid());
     }
 
 
