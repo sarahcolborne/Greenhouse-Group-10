@@ -22,15 +22,15 @@ public class SensorEntry {
         this.humid=humid;
     }
 
-    public double getHumid() {
+    public Double getHumid() {
         return humid;
     }
 
-    public double getTemp() {
+    public Double getTemp() {
         return temp;
     }
 
-    public double getLux() {
+    public Double getLux() {
         return lux;
     }
 

@@ -86,6 +86,58 @@ public class DataConverter {
         }
     }
 
+    public static String parseBluetoothDataForFirebase(final Characteristic characteristic, final byte[] data) {
+        if (data == null || data.length == 0) return "";
+
+        float floatVal;
+        float xfloatVal;
+        float yfloatVal;
+        float zfloatVal;
+
+        final String unit = characteristic.getUnit();
+
+        switch (characteristic) {
+            case HEARTRATE:
+            case BATTERY:
+            case LIGHT:
+            case CALORIES:
+            case STEPS:
+                floatVal = (data[0] & 0xff);
+                return String.format("%.0f", floatVal);
+            case TEMPERATURE:
+            case HUMIDITY:
+            case PRESSURE:
+                final int intVal = (data[1] << 8) & 0xff00 | (data[0] & 0xff);
+                floatVal = (float) intVal / 100;
+                return String.format("%.2f", floatVal, unit);
+            case ACCELERATION:
+            case MAGNET:
+                final int xintVal = ((int) data[1] << 8) | (data[0] & 0xff);
+                xfloatVal = (float) xintVal / 100;
+
+                final int yintVal = ((int) data[3] << 8) | (data[2] & 0xff);
+                yfloatVal = (float) yintVal / 100;
+
+                final int zintVal = ((int) data[5] << 8) | (data[4] & 0xff);
+                zfloatVal = (float) zintVal / 100;
+
+                return String.format("%.2f ", xfloatVal);
+            case GYRO:
+                final int gyroXintVal = ((int) data[1] << 8) | (data[0] & 0xff);
+                xfloatVal = (float) gyroXintVal;
+
+                final int gyroYintVal = ((int) data[3] << 8) | (data[2] & 0xff);
+                yfloatVal = (float) gyroYintVal;
+
+                final int gyroZintVal = ((int) data[5] << 8) | (data[4] & 0xff);
+                zfloatVal = (float) gyroZintVal;
+
+                return String.format("%.2f ", xfloatVal);
+            default:
+                return "Unknown";
+        }
+    }
+
     public static String formatForPublushing(final Characteristic characteristic, final byte[] data) {
         if (data == null || data.length == 0) return "";
 

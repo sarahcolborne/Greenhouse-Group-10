@@ -37,8 +37,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.wolkabout.hexiwear.R;
 import com.wolkabout.hexiwear.model.Characteristic;
 import com.wolkabout.hexiwear.model.HexiwearDevice;
@@ -48,6 +51,7 @@ import com.wolkabout.hexiwear.service.BluetoothService_;
 import com.wolkabout.hexiwear.util.Dialog;
 import com.wolkabout.hexiwear.util.HexiwearDevices;
 import com.wolkabout.hexiwear.util.SensorEntry;
+import com.wolkabout.hexiwear.util.SensorLogYear;
 import com.wolkabout.hexiwear.view.Reading;
 import com.wolkabout.hexiwear.view.SingleReading;
 import com.wolkabout.wolkrestandroid.Credentials_;
@@ -64,6 +68,7 @@ import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.Map;
 
 @EActivity(R.layout.activity_readings)
@@ -263,20 +268,36 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
     }
 
     DatabaseReference mRootRef;
-    public DatabaseReference mTempRef;
-    public DatabaseReference mLightRef;
-    public DatabaseReference mHumidityRef;
+    public DatabaseReference mHistorical;
+    public DatabaseReference mYearCount;
+    public DatabaseReference mYears;
+    public String yearIndex;
+    public DatabaseReference mCurrentSensor;
+
+    //old firebase
     public DatabaseReference mCurrentRef;
     public DatabaseReference mCurrTemp;
     public DatabaseReference mCurrHumidity;
     public DatabaseReference mCurrLight;
+    public DatabaseReference mTempRef;
+    public DatabaseReference mLightRef;
+    public DatabaseReference mHumidityRef;
+    public SensorLogYear currYear = new SensorLogYear();
+
+//    public int month = 0;
+//    public int week =0;
+//    public int day =0;
+//    public int hour =0;
+//    public int minute =0;
     public SensorEntry sensorData = new SensorEntry();
+
     @Receiver(actions = BluetoothService.DATA_AVAILABLE, local = true)
     void onDataAvailable(Intent intent) {
         progressBar.setVisibility(View.INVISIBLE);
 
         final String uuid = intent.getStringExtra(BluetoothService.READING_TYPE);
         final String data = intent.getStringExtra(BluetoothService.STRING_DATA);
+        final double dataForUpload = Double.parseDouble(intent.getStringExtra(BluetoothService.DATA_VAL));
 
         if (data.isEmpty()) {
             return;
@@ -288,7 +309,34 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
             return;
         }
         mRootRef = FirebaseDatabase.getInstance().getReference();
-                Log.d(TAGS, "type is" + uuid + " value:" + data);
+        Log.d(TAGS, "type is" + uuid + " value:" + data);
+        mCurrentSensor = mRootRef.child("Current_Sensor");
+        mHistorical = mRootRef.child("Historical");
+//        mYearCount = mHistorical.child("YearCount");
+//        mYears = mHistorical.child("Years");
+//        mHistorical.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                if(dataSnapshot.child("YearCount").exists()){
+//                    currYear = dataSnapshot.child("Years").child((String) dataSnapshot.child("Years").getValue()).getValue(SensorLogYear.class);
+//                    yearIndex = dataSnapshot.child("YearCount").getValue(String.class);
+//                }
+//                else {
+//                    Map<String, Object> childUpdates = new HashMap<>();
+//                    childUpdates.put("/YearCount", 1);
+//                    childUpdates.put("/Years/1", currYear);
+//                    mHistorical.updateChildren(childUpdates);
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+
+        //old firebase
         mTempRef = mRootRef.child("Temperature");
         mLightRef = mRootRef.child("Light");
         mHumidityRef = mRootRef.child("Humidity");
@@ -296,6 +344,7 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
         mCurrTemp = mCurrentRef.child("Current_Temperature");
         mCurrHumidity =mCurrentRef.child("Current_Humidity");
         mCurrLight=mCurrentRef.child("Current_Light");
+
         switch (characteristic) {
             case BATTERY:
                 readingBattery.setValue(data);
@@ -305,11 +354,13 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
                 Log.d(TAGS, "type is" + uuid + " value:" + data);
                 mTempRef.push().setValue(data);
                 mCurrTemp.setValue(data);
+                sensorData.setTemp(dataForUpload);
                 break;
             case HUMIDITY:
                 readingHumidity.setValue(data);
                 mHumidityRef.push().setValue(data);
                 mCurrHumidity.setValue(data);
+                sensorData.setHumid(dataForUpload);
                 break;
             case PRESSURE:
                 //readingPressure.setValue(data);
@@ -321,6 +372,7 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
                 readingLight.setValue(data);
                 mLightRef.push().setValue(data);
                 mCurrLight.setValue(data);
+                sensorData.setLux(dataForUpload);
                 break;
             case STEPS:
                 //readingSteps.setValue(data);
@@ -348,6 +400,13 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
                 break;
             default:
                 break;
+        }
+        if(sensorData.getHumid()!=null && sensorData.getLux()!= null && sensorData.getTemp()!= null){
+            mCurrentSensor.setValue(sensorData);
+            if(!currYear.addEntry(sensorData)) {
+                currYear = new SensorLogYear();
+                currYear.addEntry(sensorData);
+            }
         }
     }
 

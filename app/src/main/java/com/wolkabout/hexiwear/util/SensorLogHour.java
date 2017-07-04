@@ -74,4 +74,15 @@ public class SensorLogHour {
         }
         return total/size;
     }
+
+    public boolean addEntry(SensorEntry entry){
+        if(!mins[size-1].addEntry(entry)){
+            if(this.addMinute(new SensorLogMinute())){
+                return (mins[size-1].addEntry(entry));
+            }
+            else
+                return false;
+        }
+        return true;
+    }
 }

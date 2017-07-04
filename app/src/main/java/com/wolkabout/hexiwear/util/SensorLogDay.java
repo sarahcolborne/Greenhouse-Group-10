@@ -75,4 +75,15 @@ public class SensorLogDay {
         avgHumid=total/size;
         return avgHumid;
     }
+
+    public boolean addEntry(SensorEntry entry){
+        if(!hours[size-1].addEntry(entry)){
+            if(this.addHour(new SensorLogHour())){
+                return (hours[size-1].addEntry(entry));
+            }
+            else
+                return false;
+        }
+        return true;
+    }
 }

@@ -46,7 +46,7 @@ public class SensorLogMinute {
         size = i;
     }
 
-    public boolean addSecond(SensorEntry entry){
+    public boolean addEntry(SensorEntry entry){
         if(size==60){
             return false;
         }

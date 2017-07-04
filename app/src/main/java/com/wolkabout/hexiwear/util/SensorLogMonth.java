@@ -76,4 +76,15 @@ public class SensorLogMonth {
         avgHumid=total/size;
         return avgHumid;
     }
+
+    public boolean addEntry(SensorEntry entry){
+        if(!weeks[size-1].addEntry(entry)){
+            if(this.addWeek(new SensorLogWeek())){
+                return (weeks[size-1].addEntry(entry));
+            }
+            else
+                return false;
+        }
+        return true;
+    }
 }

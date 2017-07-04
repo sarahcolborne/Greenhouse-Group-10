@@ -34,6 +34,7 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Binder;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
@@ -77,7 +78,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class BluetoothService extends Service {
 
     private static final String TAG = BluetoothService.class.getSimpleName();
-
+    public static final String DATA_VAL = "dataVal";
     public static final String SERVICES_AVAILABLE = "servicesAvailable";
     public static final String DATA_AVAILABLE = "dataAvailable";
     public static final String READING_TYPE = "readingType";
@@ -414,6 +415,7 @@ public class BluetoothService extends Service {
         final Intent dataRead = new Intent(DATA_AVAILABLE);
         dataRead.putExtra(READING_TYPE, type.getUuid());
         dataRead.putExtra(STRING_DATA, DataConverter.parseBluetoothData(type, data));
+        dataRead.putExtra(DATA_VAL, DataConverter.parseBluetoothDataForFirebase(type, data));
         sendBroadcast(dataRead);
     }
 

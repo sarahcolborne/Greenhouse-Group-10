@@ -36,7 +36,7 @@ public class SensorEntryContainerTests {
         //prepare for tests
         testMinute = new SensorLogMinute();
         for(int i=0; i<60; i++){
-            testMinute.addSecond( new SensorEntry(i,i,i));
+            testMinute.addEntry(new SensorEntry(i,i,i));
             testMinAvg+=i;
         }
         testMinAvg=testMinAvg/60;
@@ -93,6 +93,19 @@ public class SensorEntryContainerTests {
     @Test
     public void minuteGetAverageHumidTest(){
        assertTrue(testMinAvg == testMinute.getAverageHumid());
+    }
+
+    @Test
+    public void testMinuteOverflow(){
+        assertTrue(testMinute.size==60);
+        assertFalse(testMinute.addEntry(new SensorEntry(1,1,1)));
+    }
+    @Test
+    public void testMinOverflowInHour(){
+        SensorLogHour overflowTest = new SensorLogHour();
+        overflowTest.addMinute(testMinute);
+        assertTrue(overflowTest.addEntry(new SensorEntry(10,10,10)));
+        assertNotNull(overflowTest.mins[1]);
     }
 
     @Test
