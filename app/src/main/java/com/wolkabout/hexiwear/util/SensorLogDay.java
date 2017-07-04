@@ -37,6 +37,7 @@ public class SensorLogDay {
         }
         hours[size]= hour;
         size++;
+        changed = true;
         return true;
     }
 

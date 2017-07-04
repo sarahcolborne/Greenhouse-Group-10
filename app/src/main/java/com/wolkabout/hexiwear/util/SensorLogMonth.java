@@ -38,6 +38,7 @@ public class SensorLogMonth {
         }
         weeks[size]= week;
         size++;
+        changed=true;
         return true;
     }
 
