@@ -38,7 +38,9 @@ public class SensorLogWeek {
         }
         days[size]= day;
         size++;
+        changed = true;
         return true;
+
     }
 
     public double getAverageTemp(){

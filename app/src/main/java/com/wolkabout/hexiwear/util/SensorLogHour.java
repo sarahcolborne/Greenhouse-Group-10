@@ -39,6 +39,7 @@ public class SensorLogHour {
         }
         mins[size]= minute;
         size++;
+        changed = true;
         return true;
     }
 

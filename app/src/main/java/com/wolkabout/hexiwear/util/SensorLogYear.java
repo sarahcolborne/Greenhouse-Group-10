@@ -42,6 +42,7 @@ public class SensorLogYear {
         }
         months[size]= month;
         size++;
+        changed = true;
         return true;
     }
 

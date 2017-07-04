@@ -51,6 +51,7 @@ import com.wolkabout.hexiwear.service.BluetoothService_;
 import com.wolkabout.hexiwear.util.Dialog;
 import com.wolkabout.hexiwear.util.HexiwearDevices;
 import com.wolkabout.hexiwear.util.SensorEntry;
+import com.wolkabout.hexiwear.util.SensorLogMinute;
 import com.wolkabout.hexiwear.util.SensorLogYear;
 import com.wolkabout.hexiwear.view.Reading;
 import com.wolkabout.hexiwear.view.SingleReading;
@@ -312,7 +313,7 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
         Log.d(TAGS, "type is" + uuid + " value:" + data);
         mCurrentSensor = mRootRef.child("Current_Sensor");
         mHistorical = mRootRef.child("Historical");
-//        mYearCount = mHistorical.child("YearCount");
+        mYearCount = mHistorical.child("YearCount");
 //        mYears = mHistorical.child("Years");
 //        mHistorical.addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -407,6 +408,20 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
                 currYear = new SensorLogYear();
                 currYear.addEntry(sensorData);
             }
+            SensorLogMinute testMin = new SensorLogMinute();
+            for(int i=0; i<60; i++){
+                testMin.addEntry(new SensorEntry(i,i,i));
+            }
+            testMin.avgHumid=10.0;
+            testMin.avgTemp=10.0;
+            testMin.avgLux = 10.0;
+            int currMonth = currYear.size -1;
+            int currWeek = currYear.months[currMonth].size -1;
+            int currDay = currYear.months[currMonth].weeks[currWeek].size-1;
+            int currHour = currYear.months[currMonth].weeks[currWeek].days[currDay].size-1;
+            int currMin = currYear.months[currMonth].weeks[currWeek].days[currDay].hours[currHour].size-1;
+            int currSec = currYear.months[currMonth].weeks[currWeek].days[currDay].hours[currHour].mins[currMin].size-1;
+            mHistorical.child("Year").child("1").child("Months").child(Integer.toString(currMonth)).child("Weeks").child(Integer.toString(currWeek)).child("Days").child(Integer.toString(currDay)).child("Hour").child(Integer.toString(currHour)).child("Min").child(Integer.toString(currMin)).child("Second").child(Integer.toString(currSec)).setValue(sensorData);
         }
     }
 

@@ -52,7 +52,7 @@ public class SensorLogMinute {
         }
         secs[size]=entry;
         size++;
-        changed = false;
+        changed = true;
         return true;
     }
 

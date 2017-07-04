@@ -40,14 +40,20 @@ public class SensorEntry {
 
     public void setTemp(double temp) {
         this.temp = temp;
+        timeStamp = System.currentTimeMillis();
+
     }
 
     public void setLux(double lux) {
         this.lux = lux;
+        timeStamp = System.currentTimeMillis();
+
     }
 
     public void setHumid(double humid) {
         this.humid = humid;
+        timeStamp = System.currentTimeMillis();
+
     }
 
     public void setTimeStamp(long timeStamp) {
