@@ -15,11 +15,11 @@ public class SensorLogYear {
     public SensorLogYear(){
         months = new SensorLogMonth[12];
         int size = 0;
-        addMonth(new SensorLogMonth());
-        months[0].addWeek(new SensorLogWeek());
-        months[0].weeks[0].addDay(new SensorLogDay());
-        months[0].weeks[0].days[0].addHour(new SensorLogHour());
-        months[0].weeks[0].days[0].hours[0].addMinute(new SensorLogMinute());
+//        addMonth(new SensorLogMonth());
+//        months[0].addWeek(new SensorLogWeek());
+//        months[0].weeks[0].addDay(new SensorLogDay());
+//        months[0].weeks[0].days[0].addHour(new SensorLogHour());
+//        months[0].weeks[0].days[0].hours[0].addMinute(new SensorLogMinute());
         changed = false;
     }
     public SensorLogYear(boolean test, double temp, double lux, double humid){
