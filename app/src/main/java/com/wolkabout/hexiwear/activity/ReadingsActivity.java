@@ -79,6 +79,7 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
     private static final String TAG = ReadingsActivity.class.getSimpleName();
     public String TAGS = "TestBlueTooth";
     public String TAGS2 = "TestBlueTooth2";
+    public long lastpush = 0;
 
     @Extra
     BluetoothDevice device;
@@ -285,6 +286,7 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
     public DatabaseReference mHumidityRef;
     public SensorLogYear currYear = new SensorLogYear();
 
+
 //    public int month = 0;
 //    public int week =0;
 //    public int day =0;
@@ -353,14 +355,14 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
             case TEMPERATURE:
                 readingTemperature.setValue(data);
                 Log.d(TAGS, "type is" + uuid + " value:" + data);
-                mTempRef.push().setValue(data);
-                mCurrTemp.setValue(data);
+                //mTempRef.push().setValue(data);
+                //mCurrTemp.setValue(data);
                 sensorData.setTemp(dataForUpload);
                 break;
             case HUMIDITY:
                 readingHumidity.setValue(data);
-                mHumidityRef.push().setValue(data);
-                mCurrHumidity.setValue(data);
+                //mHumidityRef.push().setValue(data);
+                //mCurrHumidity.setValue(data);
                 sensorData.setHumid(dataForUpload);
                 break;
             case PRESSURE:
@@ -371,8 +373,8 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
                 break;
             case LIGHT:
                 readingLight.setValue(data);
-                mLightRef.push().setValue(data);
-                mCurrLight.setValue(data);
+               // mLightRef.push().setValue(data);
+                //mCurrLight.setValue(data);
                 sensorData.setLux(dataForUpload);
                 break;
             case STEPS:
@@ -402,27 +404,32 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
             default:
                 break;
         }
-        if(sensorData.getHumid()!=null && sensorData.getLux()!= null && sensorData.getTemp()!= null){
-            mCurrentSensor.setValue(sensorData);
-            if(!currYear.addEntry(sensorData)) {
-                currYear = new SensorLogYear();
-                currYear.addEntry(sensorData);
+        long diff = System.currentTimeMillis()-lastpush;
+        if(diff>1000){
+            lastpush = System.currentTimeMillis();
+            if(sensorData.getHumid()!=null && sensorData.getLux()!= null && sensorData.getTemp()!= null){
+                mCurrentSensor.setValue(sensorData);
+                if(!currYear.addEntry(sensorData)) {
+                    currYear = new SensorLogYear();
+                    currYear.addEntry(sensorData);
+                }
+                SensorLogMinute testMin = new SensorLogMinute();
+                for(int i=0; i<60; i++){
+                    testMin.addEntry(new SensorEntry(i,i,i));
+                }
+                testMin.avgHumid=10.0;
+                testMin.avgTemp=10.0;
+                testMin.avgLux = 10.0;
+                int currMonth = currYear.size -1;
+                int currWeek = currYear.months[currMonth].size -1;
+                int currDay = currYear.months[currMonth].weeks[currWeek].size-1;
+                int currHour = currYear.months[currMonth].weeks[currWeek].days[currDay].size-1;
+                int currMin = currYear.months[currMonth].weeks[currWeek].days[currDay].hours[currHour].size-1;
+                int currSec = currYear.months[currMonth].weeks[currWeek].days[currDay].hours[currHour].mins[currMin].size-1;
+                mHistorical.child("Year").child("1").child("Months").child(Integer.toString(currMonth)).child("Weeks").child(Integer.toString(currWeek)).child("Days").child(Integer.toString(currDay)).child("Hour").child(Integer.toString(currHour)).child("Min").child(Integer.toString(currMin)).child("Second").child(Integer.toString(currSec)).setValue(sensorData);
             }
-            SensorLogMinute testMin = new SensorLogMinute();
-            for(int i=0; i<60; i++){
-                testMin.addEntry(new SensorEntry(i,i,i));
-            }
-            testMin.avgHumid=10.0;
-            testMin.avgTemp=10.0;
-            testMin.avgLux = 10.0;
-            int currMonth = currYear.size -1;
-            int currWeek = currYear.months[currMonth].size -1;
-            int currDay = currYear.months[currMonth].weeks[currWeek].size-1;
-            int currHour = currYear.months[currMonth].weeks[currWeek].days[currDay].size-1;
-            int currMin = currYear.months[currMonth].weeks[currWeek].days[currDay].hours[currHour].size-1;
-            int currSec = currYear.months[currMonth].weeks[currWeek].days[currDay].hours[currHour].mins[currMin].size-1;
-            mHistorical.child("Year").child("1").child("Months").child(Integer.toString(currMonth)).child("Weeks").child(Integer.toString(currWeek)).child("Days").child(Integer.toString(currDay)).child("Hour").child(Integer.toString(currHour)).child("Min").child(Integer.toString(currMin)).child("Second").child(Integer.toString(currSec)).setValue(sensorData);
         }
+
     }
 
     @Receiver(actions = BluetoothService.STOP)
