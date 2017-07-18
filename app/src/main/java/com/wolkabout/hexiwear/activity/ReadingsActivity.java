@@ -284,6 +284,15 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
     public DatabaseReference mTempRef;
     public DatabaseReference mLightRef;
     public DatabaseReference mHumidityRef;
+    public DatabaseReference mIndices;
+    public DatabaseReference mCurrYear;
+    public DatabaseReference mCurrMonth;
+    public DatabaseReference mCurrWeek;
+    public DatabaseReference mCurrDay;
+    public DatabaseReference mCurrHour;
+    public DatabaseReference mCurrMin;
+    public DatabaseReference mCurrSec;
+
     public SensorLogYear currYear = new SensorLogYear();
 
 
@@ -347,6 +356,16 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
         mCurrTemp = mCurrentRef.child("Current_Temperature");
         mCurrHumidity =mCurrentRef.child("Current_Humidity");
         mCurrLight=mCurrentRef.child("Current_Light");
+        mIndices = mHistorical.child("Indices");
+        mCurrYear = mIndices.child("Year");
+        mCurrMonth = mIndices.child("Month");
+        mCurrWeek = mIndices.child("Week");
+        mCurrDay = mIndices.child("Day");
+        mCurrHour = mIndices.child("Hour");
+        mCurrMin = mIndices.child("Min");
+        mCurrSec = mIndices.child("Sec");
+        int yearCount = 1;
+
 
         switch (characteristic) {
             case BATTERY:
@@ -411,6 +430,8 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
                 mCurrentSensor.setValue(sensorData);
                 if(!currYear.addEntry(sensorData)) {
                     currYear = new SensorLogYear();
+                    yearCount++;
+                    mCurrYear.setValue(yearCount);
                     currYear.addEntry(sensorData);
                 }
                 SensorLogMinute testMin = new SensorLogMinute();
@@ -427,6 +448,12 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
                 int currMin = currYear.months[currMonth].weeks[currWeek].days[currDay].hours[currHour].size-1;
                 int currSec = currYear.months[currMonth].weeks[currWeek].days[currDay].hours[currHour].mins[currMin].size-1;
                 mHistorical.child("Year").child("1").child("Months").child(Integer.toString(currMonth)).child("Weeks").child(Integer.toString(currWeek)).child("Days").child(Integer.toString(currDay)).child("Hour").child(Integer.toString(currHour)).child("Min").child(Integer.toString(currMin)).child("Second").child(Integer.toString(currSec)).setValue(sensorData);
+                mCurrSec.setValue(currSec);
+                mCurrMin.setValue(currMin);
+                mCurrHour.setValue(currHour);
+                mCurrDay.setValue(currDay);
+                mCurrWeek.setValue(currWeek);
+                mCurrMonth.setValue(currMonth);
             }
         }
 
