@@ -427,6 +427,7 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
         if(diff>1000){
             lastpush = System.currentTimeMillis();
             if(sensorData.getHumid()!=null && sensorData.getLux()!= null && sensorData.getTemp()!= null){
+                sensorData.setTimeStamp(System.currentTimeMillis());
                 mCurrentSensor.setValue(sensorData);
                 if(!currYear.addEntry(sensorData)) {
                     currYear = new SensorLogYear();
@@ -434,13 +435,6 @@ public class ReadingsActivity extends AppCompatActivity implements ServiceConnec
                     mCurrYear.setValue(yearCount);
                     currYear.addEntry(sensorData);
                 }
-                SensorLogMinute testMin = new SensorLogMinute();
-                for(int i=0; i<60; i++){
-                    testMin.addEntry(new SensorEntry(i,i,i));
-                }
-                testMin.avgHumid=10.0;
-                testMin.avgTemp=10.0;
-                testMin.avgLux = 10.0;
                 int currMonth = currYear.size -1;
                 int currWeek = currYear.months[currMonth].size -1;
                 int currDay = currYear.months[currMonth].weeks[currWeek].size-1;
